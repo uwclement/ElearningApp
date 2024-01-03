@@ -1,0 +1,27 @@
+﻿@page
+@using System.Data.SqlClient;
+@{
+	String id = Request.Query["id"];
+
+	try
+	{
+		String conString = @"Data Source=CLEMENT\SQLEXPRESS;Initial Catalog=Elearning;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
+		using (SqlConnection con = new SqlConnection(conString))
+		{
+			con.Open();
+			String sqlquery = "DELETE FROM question WHERE id = @id";
+			using (SqlCommand cmd = new SqlCommand(sqlquery, con))
+			{
+				cmd.Parameters.AddWithValue("@id", id);
+
+				cmd.ExecuteNonQuery();
+				Response.Redirect("/Exercises/ExerciseView");
+			}
+		}
+	}
+	catch (Exception ex)
+	{
+		Console.WriteLine("error" + ex.Message);
+	}
+
+}

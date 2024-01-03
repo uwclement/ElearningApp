@@ -1,0 +1,94 @@
+﻿@page
+@model ElearningApp.Pages.Exercises.ExercisesAddModel
+@{
+	Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+<style>
+	body {
+		color: black;
+		font-family: cursive
+	}
+
+	form {
+		font-size: 14px;
+		max-width: 400px;
+		margin: auto;
+		margin-top: 20px;
+	}
+
+	label {
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+
+	.row {
+		margin-bottom: 15px;
+	}
+
+	.view {
+		max-width:
+	}
+</style>
+<div class="view">
+	<h3>New Riddle</h3>
+	@if (Model.errorMessage.Length > 0)
+	{
+		<div class="alert alert-warning alert-dismissible fade show " role="alert">
+			<strong>@Model.errorMessage</strong>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+		</div>
+	}
+	<form method="POST">
+		<div class="row mb-3">
+			<label class="col-sm-3 col-form-label">Question</label>
+			<div class="col-sm-9">
+				<textarea class="form-control" name="question" value="@Model.questioninfo.Question1">@Model.questioninfo.Question1</textarea>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label class="col-sm-3 col-form-label">Answer</label>
+			<div class="col-sm-9">
+				<textarea class="form-control" name="answer" value="@Model.questioninfo.Answer">@Model.questioninfo.Answer</textarea>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label class="col-sm-03 col-form-label">Category</label>
+			<div class="col-sm-9">
+              <select class="form-control form-select mt-2" name="category">
+                 @foreach (var item in Model.categorylist)
+               {
+						<option value="@item.Id" name="category" selected>
+                 @item.CategoryName
+                </option>
+              }
+              </select>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label class="col-sm-3 col-form-label">Marks</label>
+			<div class="col-sm-9">
+				<input type="number" class="form-control" name="marks" value="@Model.questioninfo.Marks" />
+			</div>
+		</div>
+		@if (Model.successMessage.Length > 0)
+		{
+			<div class="row mb-3">
+				<div class="col-sm-9">
+					<div class="alert alert-success alert-dismissible fade show " role="alert">
+						<strong>@Model.successMessage</strong>
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+					</div>
+				</div>
+			</div>
+		}
+		<div class="row mb-3">
+			<div class="offset-sm-3 col-sm-3 d-grid">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+			<div class="offset-sm-3 col-sm-3 d-grid">
+				<a class="btn btn-primary" href="/Index" role="button">Cancel</a>
+			</div>
+		</div>
+
+	</form>
+</div>

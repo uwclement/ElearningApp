@@ -1,0 +1,53 @@
+﻿@page
+@model ElearningApp.Pages.Exercises.ExerciseViewModel
+@{
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+<style>
+    body {
+        color: black;
+        font-family: cursive
+    }
+
+    table {
+        font-size: 13px
+    }
+
+</style>
+<br />
+<h3>List of Question</h3>
+
+<a class="btn btn-primary btn-sm" href='/Exercises/ExercisesAdd'> Add Question</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Question</th>
+            <th>Answer</th>
+            <th>Marks</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.questionlist)
+        {
+
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Question1</td>
+                <td>@item.Answer</td>
+                <td>@item.Marks</td>
+                <td>@item.Category</td>
+
+                <td>
+                    <a class="btn btn-primary btn-sm" href='/Exercises/ExerciseEdit?id=@item.Id'> Edit</a>
+
+                    <a class="btn btn-primary btn-sm" href='/Exercises/ExerciseDelete?id=@item.Id'> Delete</a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

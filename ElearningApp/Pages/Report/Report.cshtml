@@ -1,0 +1,97 @@
+﻿@page
+@model ElearningApp.Pages.Report.ReportModel
+@{
+    Layout = "~/Pages/Shared/_StudentLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Loader Card Example</title>
+</head>
+<body>
+
+    <div class="container mt-6">
+        <div class="row">
+            <div class="col-md-5">
+                <!-- Main Content Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Statistics Card</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <p class="card-text">Total Users: <span id="totalUsers">@Model.tusers</span></p>
+                            <p class="card-text">Active Users: <span id="activeUsers">Loading...</span></p>
+                            <p class="card-text">Revenue: <span id="revenue">Loading...</span></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <!-- Sidebar Card for High Marks -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">High Marks List</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Total Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Userlist)
+                                {
+                                    <!-- Example list items (replace with actual data) -->
+                                    <tr>
+                                        <td>@item.Fullnames</td>
+                                        <td>@item.TotalScore</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <form method="post" > <button class="btn " asp-page-handler="download" > Download</button>
+                                </form>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <a class="btn btn-primary btn-sm" href='/assessment/assessmentAdd?id=0'>Play</a>
+        </div>
+    </div>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UJihUE32oL0OV9PqQye4eUYlOz3qzAqxCnfzagID6zpk7zWeT+BqE2p5MIdNl2uX" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIbfcIbu5tNtLzmhHCF3p5U9xN" crossorigin="anonymous"></script>
+
+    <!-- Your custom script to load data and update the statistics -->
+      <script>
+        // Simulate loading data
+        setTimeout(function () {
+            // Update the statistics
+            document.getElementById('totalUsers').innerText = '10';
+            document.getElementById('activeUsers').innerText = '800';
+            document.getElementById('revenue').innerText = '$1,000,000';
+            // Hide the loader
+            $('.spinner-border').hide();
+        }, 2000); // Adjust the time as needed
+    </script>  
+
+</body>
+</html>
